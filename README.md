@@ -11,9 +11,9 @@ A modern, collaborative system designed to streamline restaurant operations incl
 - Admin dashboard
 
 ## 🛠️ Built With
-- Frontend: React / Vue / Angular (TBD)
-- Backend: Node.js / Express / Django / Laravel (TBD)
-- Database: MongoDB / MySQL / PostgreSQL (TBD)
+- Frontend: React / Angular (TBD)
+- Backend: Spring Boot
+- Database:  MySQL 
 
 ## 👥 Collaboration
 This is an open-source project. We welcome developers, designers, testers, and tech writers to contribute!
@@ -34,8 +34,7 @@ This is an open-source project. We welcome developers, designers, testers, and t
 
 ## 📬 Contact
 Feel free to reach out or connect:
-- [LinkedIn](your-link)
-- [Email](mailto:your@email.com)
+- [Email](mailto:gihan.edu.sl@gmail.com)
 
 ## ⭐ Give a star if you like this project!
 
