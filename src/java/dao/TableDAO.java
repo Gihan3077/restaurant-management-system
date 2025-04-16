@@ -1,87 +1,115 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package dao;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import model.Table;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- *
- * @author ASUS
- */
-@WebServlet(name = "TableDAO", urlPatterns = {"/TableDAO"})
-public class TableDAO extends HttpServlet {
+public class TableDAO {
+    private Connection connection;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet TableDAO</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet TableDAO at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+    public TableDAO() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/restaurant_db", 
+                "root", 
+                "");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    // Get all tables
+    public List<Table> getAllTables() {
+        List<Table> tables = new ArrayList<>();
+        String sql = "SELECT * FROM tables";
+        
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            
+            while (rs.next()) {
+                Table table = new Table();
+                table.setTableId(rs.getInt("table_id"));
+                table.setStatus(rs.getString("status"));
+                table.setCapacity(rs.getInt("capacity"));
+                table.setLocation(rs.getString("location"));
+                
+                tables.add(table);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tables;
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    // Get available tables
+    public List<Table> getAvailableTables() {
+        List<Table> tables = new ArrayList<>();
+        String sql = "SELECT * FROM tables WHERE status = 'available'";
+        
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            
+            while (rs.next()) {
+                Table table = new Table();
+                table.setTableId(rs.getInt("table_id"));
+                table.setStatus(rs.getString("status"));
+                table.setCapacity(rs.getInt("capacity"));
+                table.setLocation(rs.getString("location"));
+                
+                tables.add(table);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tables;
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    // Update table status
+    public boolean updateTableStatus(int tableId, String status) {
+        String sql = "UPDATE tables SET status = ? WHERE table_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, status);
+            ps.setInt(2, tableId);
+            
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
+    // Get table by ID
+    public Table getTableById(int tableId) {
+        String sql = "SELECT * FROM tables WHERE table_id = ?";
+        
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, tableId);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                Table table = new Table();
+                table.setTableId(rs.getInt("table_id"));
+                table.setStatus(rs.getString("status"));
+                table.setCapacity(rs.getInt("capacity"));
+                table.setLocation(rs.getString("location"));
+                return table;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Close connection
+    public void close() {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,87 +1,96 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package model;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
-/**
- *
- * @author ASUS
- */
-@WebServlet(name = "Inventory", urlPatterns = {"/Inventory"})
-public class Inventory extends HttpServlet {
+public class Inventory {
+    private int inventoryId;
+    private String itemName;
+    private String category; // Food, Beverage, Cleaning, etc.
+    private double quantity;
+    private String unit; // kg, liter, packet, etc.
+    private double thresholdLevel;
+    private Date lastRestocked;
+    private String supplier;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Inventory</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Inventory at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+    // Constructors
+    public Inventory() {}
+
+    public Inventory(int inventoryId, String itemName, String category, 
+                    double quantity, String unit, double thresholdLevel, 
+                    Date lastRestocked, String supplier) {
+        this.inventoryId = inventoryId;
+        this.itemName = itemName;
+        this.category = category;
+        this.quantity = quantity;
+        this.unit = unit;
+        this.thresholdLevel = thresholdLevel;
+        this.lastRestocked = lastRestocked;
+        this.supplier = supplier;
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    // Getters and Setters
+    public int getInventoryId() {
+        return inventoryId;
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    public void setInventoryId(int inventoryId) {
+        this.inventoryId = inventoryId;
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    // ... (similar getters/setters for all fields)
+    public String getItemName() {
+        return itemName;
+    }
 
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public double getThresholdLevel() {
+        return thresholdLevel;
+    }
+
+    public void setThresholdLevel(double thresholdLevel) {
+        this.thresholdLevel = thresholdLevel;
+    }
+
+    public Date getLastRestocked() {
+        return lastRestocked;
+    }
+
+    public void setLastRestocked(Date lastRestocked) {
+        this.lastRestocked = lastRestocked;
+    }
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
 }
