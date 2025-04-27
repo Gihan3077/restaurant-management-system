@@ -1,42 +1,54 @@
 package dao;
 
 import model.User;
-import java.sql.*;
+import model.DBConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import util.PasswordUtil;
 
 public class UserDAO {
-    private Connection connection;
+    public User validateUser(String username, String password) {
+    User user = null;
+    String sql = "SELECT * FROM users WHERE username = ?";
     
-    public UserDAO() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/restaurant_db", 
-                "root", 
-                "");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public User getUser(String email, String password) {
-        User user = null;
-        try {
-            PreparedStatement ps = connection.prepareStatement(
-                "SELECT * FROM users WHERE email=? AND password=?");
-            ps.setString(1, email);
-            ps.setString(2, password);
-            
-            ResultSet rs = ps.executeQuery();
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        
+        stmt.setString(1, username);
+        
+        try (ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {
-                user = new User();
-                user.setUserId(rs.getInt("user_id"));
-                user.setName(rs.getString("name"));
-                user.setEmail(rs.getString("email"));
-                user.setRole(rs.getString("role"));
+                String storedHash = rs.getString("password");
+                if (PasswordUtil.checkPassword(password, storedHash)) {
+                    user = new User();
+                    user.setId(rs.getInt("id"));
+                    user.setUsername(rs.getString("username"));
+                    user.setPassword(storedHash);
+                    user.setRole(rs.getString("role"));
+                }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return user;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return user;
+}
+     public boolean registerUser(User user) {
+    String sql = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
+    
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        
+        stmt.setString(1, user.getUsername());
+        stmt.setString(2, PasswordUtil.hashPassword(user.getPassword()));
+        stmt.setString(3, user.getRole());
+        
+        return stmt.executeUpdate() > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+} 
 }
