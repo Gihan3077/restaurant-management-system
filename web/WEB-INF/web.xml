@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+    
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>controller.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>controller.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>FoodServlet</servlet-name>
+        <servlet-class>controller.FoodServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FoodServlet</servlet-name>
+        <url-pattern>/FoodServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CancelReservationServlet</servlet-name>
+        <servlet-class>controller.CancelReservationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CancelReservationServlet</servlet-name>
+        <url-pattern>/CancelReservationServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ReservationServlet</servlet-name>
+        <servlet-class>controller.ReservationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReservationServlet</servlet-name>
+        <url-pattern>/ReservationServlet</url-pattern>
+    </servlet-mapping>
+    
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
+    
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/error.jsp</location>
+    </error-page>
+</web-app>
