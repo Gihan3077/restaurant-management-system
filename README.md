@@ -4,14 +4,14 @@ A modern, collaborative system designed to streamline restaurant operations incl
 
 ## 🚀 Features
 - Customer & staff login system
-- Table booking and availability
+- Food reservation and availability
 - Menu management
 - Order processing & billing
 - Inventory tracking
 - Admin dashboard
 
 ## 🛠️ Built With
-- Version Control: VS Code /  Apache NetBeans
+- Version Control: VS Code /  Apache NetBeans / IntelliJ IDEA
 - Frontend: JSP / Angular (TBD)
 - Backend: Java Servlets
 - Database:  MySQL 
