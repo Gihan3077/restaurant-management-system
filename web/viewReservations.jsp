@@ -12,7 +12,7 @@
         table, th, td { border: 1px solid #ddd; }
         th, td { padding: 12px; text-align: left; }
         th { background-color: #f2f2f2; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
+        tr { background-color: #f9f9f9; }
         
         .cancelled { background-color: #ffdddd; }
         .action-btn { 
