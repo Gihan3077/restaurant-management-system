@@ -12,8 +12,8 @@ A modern, collaborative system designed to streamline restaurant operations incl
 
 ## 🛠️ Built With
 - Version Control: VS Code /  Apache NetBeans
-- Frontend: React / Angular (TBD)
-- Backend: Spring Boot
+- Frontend: JSP / Angular (TBD)
+- Backend: Java Servlets
 - Database:  MySQL 
 
 ## 👥 Collaboration
