@@ -11,6 +11,7 @@ A modern, collaborative system designed to streamline restaurant operations incl
 - Admin dashboard
 
 ## 🛠️ Built With
+- UI/UX : Figma
 - Version Control: VS Code /  Apache NetBeans / IntelliJ IDEA
 - Frontend: JSP / Angular (TBD)
 - Backend: Java Servlets
