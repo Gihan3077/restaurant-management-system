@@ -1,1 +1,9 @@
-/build/
+# /build/
+# *.class
+# *.log
+# *.war
+# *.iml
+# target/
+# build/
+# .idea/
+# out/
