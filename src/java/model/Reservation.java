@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Reservation model representing a food reservation entry.
+ */
+
+
 public class Reservation {
     private int id;
     private String customerName;
