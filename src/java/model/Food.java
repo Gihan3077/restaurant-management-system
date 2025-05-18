@@ -15,6 +15,7 @@ public class Food {
         this.status = status;
     }
 
+
     // Getters and Setters
     public int getId() {
         return id; 
@@ -40,4 +41,15 @@ public class Food {
     public void setStatus(String status) {
         this.status = status; 
     }
+
+
+    public String toString() {
+        return "Food{" +
+                "id=" + id +
+                 ", title='" + title + '\'' +
+                ", ingredients='" + ingredients + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+}
+
 }
