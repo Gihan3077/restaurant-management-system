@@ -10,13 +10,15 @@ public class Reservation {
 
     public Reservation() {}
     
-    public Reservation(int id, String customerName, String customerPhone, int foodId, String reservationDate) {
-        this.id = id;
-        this.customerName = customerName;
-        this.customerPhone = customerPhone;
-        this.foodId = foodId;
-        this.reservationDate = reservationDate;
+    public Reservation(int id, String customerName, String customerPhone, int foodId, String reservationDate, String status) {
+    this.id = id;
+    this.customerName = customerName;
+    this.customerPhone = customerPhone;
+    this.foodId = foodId;
+    this.reservationDate = reservationDate;
+    this.status = status;
     }
+
 
     // Getters and Setters
     public int getId() {
