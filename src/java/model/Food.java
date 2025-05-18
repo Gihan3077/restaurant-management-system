@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Food model representing a menu item in the system.
+ */
+
+
 public class Food {
     private int id;
     private String title;
