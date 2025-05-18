@@ -1,6 +1,6 @@
 <%-- 
     Admin Dashboard JSP 
-    Displays system overview and includes food management section.
+    Displays system overview and includes food management section..
 --%>
 
 
