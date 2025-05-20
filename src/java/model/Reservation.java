@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Reservation model representing a food reservation entry.
+ * Reservation model representing a food reservation entry..
  */
 
 
